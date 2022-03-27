@@ -56,20 +56,15 @@ export default function (props) {
             });
 
             //Starting
-            app.listen(server.port, function (err) {
-                if (err) {
-                    console.log(err);
-                    cb?.(err)
-                } else {
-                    open(`http://${server.host}:${server.port}/`)
-                        .then(() => {
-                            cb?.()
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                            cb?.(err)
-                        });
-                }
+            app.listen(server.port, () => {
+                open(`http://${server.host}:${server.port}/`)
+                    .then(() => {
+                        cb?.();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        cb?.(err);
+                    });
             });
         }
     };

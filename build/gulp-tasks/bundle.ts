@@ -9,10 +9,14 @@ import webpack from 'webpack';
 export default function bundle(props) {
     return (done) => {
         webpack(webpackConfigFactory(props), (error, stats) => {
-            console.log(stats.toString({
-                chunks: false,
-                colors: true
-            }));
+            if(error) {
+                done?.(error);
+            } else {
+                console.log(stats!.toString({
+                    chunks: false,
+                    colors: true
+                }));
+            }
         });
 
         done?.();

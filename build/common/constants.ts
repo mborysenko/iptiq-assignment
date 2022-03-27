@@ -1,4 +1,4 @@
-const BUILD_MODES = {
+export const BUILD_MODES = {
     DEV: 'development',
     TEST: 'test',
     PROD: 'production'

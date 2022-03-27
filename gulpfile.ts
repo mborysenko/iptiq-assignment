@@ -45,5 +45,5 @@ gulp.task('eslint:fix', (cb) => {
 
 gulp.task("default", gulp.series("clean", "eslint", "build", (done) => done()));
 
-gulp.task("start", gulp.series("default", "serve", "api"), (done) => done());
+gulp.task("start", gulp.series("default", "serve", (done) => done()));
 
