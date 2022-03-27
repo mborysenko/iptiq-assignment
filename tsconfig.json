@@ -16,7 +16,7 @@
         "allowSyntheticDefaultImports": true,
         "paths": {
             "@extensions/*": ["./extensions/*"],
-            "@components/*": ["./components/*"],
+            "@components/*": ["./components/*"]
         },
         "declaration": false,
         "declarationMap": false,
@@ -39,5 +39,10 @@
     ],
     "files": [
         "./build/types/less.d.ts"
-    ]
+    ],
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    }
 }
