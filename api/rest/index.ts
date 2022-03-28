@@ -14,18 +14,40 @@ app.get('/heartbeat', (request, response) => {
 /**
  * Gets list of doodles.
  */
-app.get('/doodles/:status?', async (request, response) => {
-    const {params} = request
+app.route('/doodles/:status?')
+    .get(async (request, response) => {
+        const {params} = request
 
-    await prisma.$connect();
-    const doodles = await prisma.doodle.findMany({
-        where: {
-            statusId: params.status
-        }
+        await prisma.$connect();
+        const doodles = await prisma.doodle.findMany({
+            where: {
+                statusId: params.status
+            }
+        })
+    })
+    .post(async (request, response) => {
+        const {params} = request
+
+        await prisma.$connect();
+        const doodles = await prisma.doodle.findMany({
+            where: {
+                OR: [
+                    {
+                        body: {
+                            contains: params.status,
+                        },
+                    },
+                    {
+                        title: {
+                            contains: params.status,
+                        }
+                    },
+                ],
+            },
+        });
+
+        response.json(doodles);
     });
-
-    response.json(doodles);
-});
 
 app.route('/doodle/:id')
     .get(async (request, response) => {
