@@ -1,4 +1,4 @@
-import { app } from './rest'
+import { app } from './index'
 
 export const start = (port, callback) => {
     try {
