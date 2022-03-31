@@ -5,21 +5,21 @@ export default function (client: PrismaClient) {
         const {params} = request;
 
         await client.$connect();
-        const doodle = await client.doodle.findUnique({
+        const doodles = await client.doodle.findMany({
             where: {
-                id: params.statusId
+                statusId: params.statusId
             },
         })
 
-        if (doodle) {
-            response.json(doodle);
+        if (doodles) {
+            response.json(doodles);
         } else {
             response.status(404).send('Doodle not found.')
         }
     }
     GET.apiDoc = {
-        summary: 'Returns doodle by id.',
-        operationId: 'getDoodle',
+        summary: 'Returns list of doodles by status id.',
+        operationId: 'getDoodles',
         parameters: [
             {
                 in: 'path',

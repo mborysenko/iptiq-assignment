@@ -1,6 +1,7 @@
 import express from 'express'
 
 import {PrismaClient} from '@prisma/client';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import { initialize }  from 'express-openapi';
 import { serve, setup } from 'swagger-ui-express';
@@ -10,6 +11,7 @@ import * as path from "path";
 const prisma = new PrismaClient();
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(
