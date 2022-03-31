@@ -1,11 +1,28 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { Status } from '../models/Status';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class DefaultService {
+
+    /**
+     * Returns list of statuses.
+     * @returns Status A list of statuses.
+     * @throws ApiError
+     */
+    public static getStatuses(): CancelablePromise<Array<Status>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v1/statuses/',
+            errors: {
+                404: `Statuses haven't been found`,
+            },
+        });
+    }
 
     /**
      * Creates new doodle.
@@ -31,18 +48,18 @@ export class DefaultService {
     }> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/v1/doodles/',
+            url: '/v1/doodle/',
             body: data,
         });
     }
 
     /**
-     * Returns doodle by id.
+     * Returns list of doodles by status id.
      * @param statusId
      * @returns any A list of doodles that match the requested status.
      * @throws ApiError
      */
-    public static getDoodle(
+    public static getDoodles(
         statusId: string,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -76,7 +93,7 @@ export class DefaultService {
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/v1/doodles/{doodleId}',
+            url: '/v1/doodle/{doodleId}',
             path: {
                 'statusId': statusId,
             },
@@ -100,7 +117,7 @@ export class DefaultService {
     }> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/v1/doodles/{doodleId}',
+            url: '/v1/doodle/{doodleId}',
             path: {
                 'doodleId': doodleId,
             },
