@@ -27,8 +27,8 @@ gulp.task("api", (done) => {
     api(configuration)(done);
 });
 
-gulp.task("serve", (done) => {
-    start(configuration)(done);
+gulp.task("start", (done) => {
+    start(configuration, done);
 });
 
 gulp.task("test", (done) => {
@@ -45,5 +45,4 @@ gulp.task('eslint:fix', (cb) => {
 
 gulp.task("default", gulp.series("clean", "eslint", "build", (done) => done()));
 
-gulp.task("start", gulp.series("default", "serve", (done) => done()));
 

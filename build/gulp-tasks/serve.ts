@@ -12,7 +12,7 @@ import webpackConfigFactory from '../webpack/config-factory';
  * @module serve
  * @param {Object} props Build props.
  */
-export default function (props) {
+export default function (props, done) {
     const app = express();
 
     let {
@@ -22,50 +22,44 @@ export default function (props) {
 
     let webpackConfig = webpackConfigFactory(props);
 
+    const compiler = webpack(webpackConfig);
+    app.use(dev(compiler, {
+        publicPath: "/"
+    }));
+    app.use(hot(compiler));
+    serve(compiler, done);
 
-    return function (done) {
-        let compiler = webpack(webpackConfig);
+    function serve(compiler, cb) {
+        //Middleware
+        app.use(express.static(join(dist, '/assets')));
 
-        app.use(dev(compiler, {
-            publicPath: "/"
-        }));
+        //Routing. Order does matter
+        app.get('/favicon.ico', function (req, res) {
+            res.sendFile(join(dist, 'favicon.ico'));
+        });
 
-        app.use(hot(compiler));
-
-        serve(done);
-
-        function serve(cb) {
-            //Middleware
-            app.use(express.static(join(dist, '/assets')));
-
-            //Routing. Order does matter
-            app.get('/favicon.ico', function (req, res) {
-                res.sendFile(join(dist, 'favicon.ico'));
+        app.get('*', function (req, res) {
+            const filename = path.resolve(compiler.outputPath, 'index.html');
+            compiler.outputFileSystem.readFile(filename, (err, result) => {
+                if (err) {
+                    return cb?.(err);
+                }
+                res.set('content-type','text/html');
+                res.send(result);
+                res.end();
             });
+        });
 
-            app.get('*', function (req, res) {
-                const filename = path.resolve(compiler.outputPath, 'index.html');
-                compiler.outputFileSystem.readFile(filename, (err, result) => {
-                    if (err) {
-                        return cb?.(err);
-                    }
-                    res.set('content-type','text/html');
-                    res.send(result);
-                    res.end();
+        //Starting
+        app.listen(server.port, () => {
+            open(`http://${server.host}:${server.port}/`)
+                .then(() => {
+                    cb?.();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    cb?.(err);
                 });
-            });
-
-            //Starting
-            app.listen(server.port, () => {
-                open(`http://${server.host}:${server.port}/`)
-                    .then(() => {
-                        cb?.();
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        cb?.(err);
-                    });
-            });
-        }
-    };
+        });
+    }
 };

@@ -151,7 +151,10 @@ export default function webpackConfigFactory(props) {
                 showErrors: true,
                 inject: false,
             }),
-        ]
+        ],
+        watchOptions: {
+            ignored: /dist/
+        }
     };
 
     return merge(commonConfig, envConfig(props));
