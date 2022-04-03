@@ -1,6 +1,6 @@
 import {CircularProgress, Icon, MenuItem, Select} from "@mui/material";
 import {useQuery} from "react-query";
-import {DefaultService, Status} from "../../services/doodle";
+import {DefaultService, Status} from "../../service";
 import {useState, VFC} from "react";
 
 export type StatusesProps<T extends string = string> = {

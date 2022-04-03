@@ -2,7 +2,7 @@ import {useCallback, VFC} from "react";
 import {Button, Card, CardActions, CardContent, CardHeader} from "@mui/material";
 import {Statuses} from "@extensions/doodle/components/Statuses";
 import {useMutation, useQueryClient} from "react-query";
-import {DefaultService, Doodle} from "../../services/doodle";
+import {DefaultService, Doodle} from "../../service";
 
 export type TaskProps = {
     task: Doodle,

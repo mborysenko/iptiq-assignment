@@ -2,7 +2,7 @@ import {VFC} from "react";
 import {LaneProps} from "./types";
 import {Column, Spacer, Units} from "@dhampir/core";
 import {useQuery} from 'react-query';
-import {DefaultService, Doodle} from "../../services/doodle";
+import {DefaultService, Doodle} from "../../service";
 import classnames from 'classnames';
 import styles from './styles.less';
 import {Task} from "@extensions/doodle/components/Board/Task";
