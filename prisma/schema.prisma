@@ -1,6 +1,6 @@
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://officer:fHmfajWzJOAZyly4@cluster0.rknke.mongodb.net/iptiq?retryWrites=true&w=majority"
+  url      = env("DB_URL")
 }
 
 generator client {
