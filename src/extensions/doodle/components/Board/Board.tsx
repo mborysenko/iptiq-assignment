@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {BoardProps} from "./types";
-import {Direction, Row, Screen} from "@dhampir/core";
+import {Direction, Row, Screen, Scroller} from "@dhampir/core";
 import {Box, Typography} from "@mui/material";
 import classnames from "classnames";
 
@@ -18,6 +18,8 @@ export const Board: FC<BoardProps> = ({children, title}) => {
         }} variant={'h2'}>{title}</Typography>
             </Box>
         </Row>
-        <Row greedy={true} className={classnames(styles)}>{children}</Row>
+        <Row greedy={true} holdsAbsolute={true} className={classnames(styles)}><Scroller>
+            <Row greedy={true}>{children}</Row>
+        </Scroller></Row>
     </Screen>
 }
