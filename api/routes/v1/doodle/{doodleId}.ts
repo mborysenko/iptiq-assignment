@@ -5,25 +5,30 @@ export default function (client: PrismaClient) {
         const {params} = request;
 
         await client.$connect();
-        const doodle = await client.doodle.findUnique({
-            where: {
-                id: params.doodleId
-            },
-        })
+        try {
+            const doodle = await client.doodle.findUnique({
+                where: {
+                    id: params.doodleId
+                },
+            })
 
-        if (doodle) {
-            response.json(doodle);
-        } else {
-            response.status(404).send('Doodle not found.')
+            if (doodle) {
+                response.json(doodle);
+            } else {
+                response.status(404).send('Doodle not found.')
+            }
+        } catch (error) {
+            response.status(400).send(error);
         }
     }
+
     GET.apiDoc = {
         summary: 'Returns doodle by id.',
         operationId: 'getDoodle',
         parameters: [
             {
                 in: 'path',
-                name: 'statusId',
+                name: 'doodleId',
                 required: true,
                 type: 'string'
             }
@@ -43,7 +48,13 @@ export default function (client: PrismaClient) {
                 schema: {
                     additionalProperties: true
                 }
-            }
+            },
+            400: {
+                description: 'Bad request',
+                schema: {
+                    additionalProperties: true
+                }
+            },
         }
     };
 
@@ -52,21 +63,26 @@ export default function (client: PrismaClient) {
 
         await client.$connect();
 
-        const updatedDoodle = await client.doodle.update({
-            where: {
-                id: params.id
-            },
-            data: {
-                ...body,
-            },
-            select: {
-                id: true,
-                title: true,
-                body: true,
-            }
-        })
+        try {
+            const updatedDoodle = await client.doodle.update({
+                where: {
+                    id: params.doodleId
+                },
+                data: {
+                    ...body,
+                },
+                select: {
+                    id: true,
+                    title: true,
+                    body: true,
+                    statusId: true,
+                }
+            })
 
-        response.json(updatedDoodle);
+            response.json(updatedDoodle);
+        } catch (error) {
+            response.status(400).send(error);
+        }
     };
     PATCH.apiDoc = {
         summary: 'Updates doodle by id.',
@@ -74,7 +90,7 @@ export default function (client: PrismaClient) {
         parameters: [
             {
                 in: 'path',
-                name: 'statusId',
+                name: 'doodleId',
                 required: true,
                 type: 'string'
             }, {
@@ -118,7 +134,13 @@ export default function (client: PrismaClient) {
                 schema: {
                     additionalProperties: true
                 }
-            }
+            },
+            400: {
+                description: 'Bad request',
+                schema: {
+                    additionalProperties: true
+                }
+            },
         }
     };
 
@@ -127,13 +149,18 @@ export default function (client: PrismaClient) {
 
         await client.$connect();
 
-        await client.doodle.delete({
-            where: {
-                id: params.doodleId,
-            }
-        })
+        try {
+            await client.doodle.delete({
+                where: {
+                    id: params.doodleId,
+                }
+            });
 
-        response.json({removed: params.doodleId})
+            response.json({removed: params.doodleId});
+
+        } catch (error) {
+            response.status(400).send(error);
+        }
     };
 
     DELETE.apiDoc = {
@@ -165,7 +192,13 @@ export default function (client: PrismaClient) {
                 schema: {
                     additionalProperties: true
                 }
-            }
+            },
+            400: {
+                description: 'Bad request',
+                schema: {
+                    additionalProperties: true
+                }
+            },
         }
     };
 

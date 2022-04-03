@@ -12,7 +12,7 @@ export default {
                 id: {
                     type: "string",
                 },
-                name: {
+                title: {
                     type: "string",
                 },
                 body: {

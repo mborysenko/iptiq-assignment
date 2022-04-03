@@ -5,16 +5,20 @@ export default function (client: PrismaClient) {
         const {params} = request;
 
         await client.$connect();
-        const doodles = await client.doodle.findMany({
-            where: {
-                statusId: params.statusId
-            },
-        })
+        try{
+            const doodles = await client.doodle.findMany({
+                where: {
+                    statusId: params.statusId
+                },
+            })
 
-        if (doodles) {
-            response.json(doodles);
-        } else {
-            response.status(404).send('Doodle not found.')
+            if (doodles) {
+                response.json(doodles);
+            } else {
+                response.status(404).send('There are no Doodles with such status');
+            }
+        } catch (error) {
+            response.status(400).send(error);
         }
     }
     GET.apiDoc = {
@@ -43,7 +47,13 @@ export default function (client: PrismaClient) {
                 schema: {
                     additionalProperties: true
                 }
-            }
+            },
+            400: {
+                description: 'Bad request',
+                schema: {
+                    additionalProperties: true
+                }
+            },
         }
     };
 
