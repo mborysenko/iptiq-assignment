@@ -2,6 +2,7 @@ FROM debian:latest
 SHELL ["/bin/bash", "-l", "-c"]
 
 ARG PASSWORD=qwerty1234
+ENV DB_URL='please provide link'
 
 USER root
 RUN apt-get update -y
@@ -25,5 +26,8 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | b
 RUN npm install -g yarn
 RUN yarn --version
 RUN yarn install
+RUN yarn generate:dbclient
+RUN yarn generate:data
+RUN yarn generate:data
 
-CMD yarn run start
+CMD yarn run api start
