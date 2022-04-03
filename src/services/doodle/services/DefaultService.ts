@@ -76,13 +76,13 @@ export class DefaultService {
 
     /**
      * Updates doodle by id.
-     * @param statusId
+     * @param doodleId
      * @param data
      * @returns any A doodle that has been updated.
      * @throws ApiError
      */
     public static updateDoodle(
-        statusId: string,
+        doodleId: string,
         data?: {
             title?: string;
             body?: string;
@@ -95,7 +95,7 @@ export class DefaultService {
             method: 'PATCH',
             url: '/v1/doodle/{doodleId}',
             path: {
-                'statusId': statusId,
+                'doodleId': doodleId,
             },
             body: data,
             errors: {

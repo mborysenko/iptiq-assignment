@@ -4,7 +4,7 @@
 
 export type Doodle = {
     id: string;
-    name?: string;
+    title?: string;
     body?: string;
     userId?: string;
     categoryId?: string;
