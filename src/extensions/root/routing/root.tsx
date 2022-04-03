@@ -4,7 +4,7 @@ import { MainMenu } from '@components/widgets';
 
 const routes: RouteWithChildren = {
     id: 'defaultRoute',
-    path: ['/'],
+    path: '/',
     rendering: [
         {
             area: RoutingArea.TOP,

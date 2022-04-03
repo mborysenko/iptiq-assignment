@@ -10,7 +10,8 @@
         "jsx": "react-jsx",
         "moduleResolution": "node",
         "typeRoots": [
-            "node_modules/@types"
+            "node_modules/@types",
+		    "src/extensions/doodle/services/doodle"
         ],
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,

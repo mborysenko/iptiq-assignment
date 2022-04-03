@@ -1635,10 +1635,10 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@dhampir/core@1.0.0-beta.15":
-  version "1.0.0-beta.15"
-  resolved "https://registry.yarnpkg.com/@dhampir/core/-/core-1.0.0-beta.15.tgz#ae5aff54f31d84ac47604afa060bfa4e6f950be3"
-  integrity sha512-AiO6P3Hlp3W/KY+5g7bnkg0TZHWvD17Ih4lHZnm0rhJOQElHlyoTvULDtlUNTScwpbN3Sb/qQtv2NYy6uWtOQw==
+"@dhampir/core@1.0.0-beta.16":
+  version "1.0.0-beta.16"
+  resolved "https://registry.yarnpkg.com/@dhampir/core/-/core-1.0.0-beta.16.tgz#ff5054265deb22ffc5239d4247f217551a082bbd"
+  integrity sha512-xauTpHEchhJ1AdeyCzKnytJW/EkP0QYo+kHZc9+MZIjWEPnK/yV+yo71dh5AQWVXGc6w+qPM7yONAaXGRB+xOg==
   dependencies:
     "@babel/runtime" "7.12.18"
     "@fortawesome/fontawesome-svg-core" "1.2.36"
@@ -1650,7 +1650,6 @@
     react-dom "17.0.2"
     react-is "17.0.2"
     react-jsx "1.0.0"
-    react-query "3.21.0"
     react-redux "7.2.4"
     react-router "5.2.0"
     react-router-dom "5.2.0"
@@ -4639,7 +4638,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@*, classnames@2.3.1:
+classnames@*, classnames@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
@@ -11440,15 +11439,6 @@ react-query@*:
   version "3.18.1"
   resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.18.1.tgz#893b5475a7b4add099e007105317446f7a2cd310"
   integrity sha512-17lv3pQxU9n+cB5acUv0/cxNTjo9q8G+RsedC6Ax4V9D8xEM7Q5xf9xAbCPdEhDrrnzPjTls9fQEABKRSi7OJA==
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    broadcast-channel "^3.4.1"
-    match-sorter "^6.0.2"
-
-react-query@3.21.0:
-  version "3.21.0"
-  resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.21.0.tgz#2e099a7906c38eeeb750e8b9b12121a21fa8d9ef"
-  integrity sha512-5rY5J8OD9f4EdkytjSsdCO+pqbJWKwSIMETfh/UyxqyjLURHE0IhlB+IPNPrzzu/dzK0rRxi5p0IkcCdSfizDQ==
   dependencies:
     "@babel/runtime" "^7.5.5"
     broadcast-channel "^3.4.1"
