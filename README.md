@@ -1,7 +1,7 @@
 # Getting Started
 
 Web application is using React as main UI library and react-query for managing async calls and global state.
-I'm also using my own package to enable extensibility.
+I'm also using my own package(Dhampir Core) to enable extensibility and routing.
 
 ## Prerequisites
 
